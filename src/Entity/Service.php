@@ -36,12 +36,7 @@ class Service
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="services")
      */
-    private $services;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private $categorie;
 
     public function getNom(): ?string
     {
@@ -79,15 +74,36 @@ class Service
         return $this;
     }
 
-    public function getServices(): ?Categorie
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        return $this->services;
+        return $this->id;
     }
 
-    public function setServices(?Categorie $services): self
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        $this->services = $services;
-
-        return $this;
+        $this->id = $id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie): void
+    {
+        $this->categorie = $categorie;
+    }
+
 }
