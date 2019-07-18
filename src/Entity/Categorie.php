@@ -25,6 +25,11 @@ class Categorie
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categories")
+     */
+    private $categorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -41,5 +46,23 @@ class Categorie
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * @param mixed $categorie
+     */
+    public function setCategorie($categorie): void
+    {
+        $this->categorie = $categorie;
+    }
+
+
 
 }
