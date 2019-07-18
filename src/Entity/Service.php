@@ -38,6 +38,21 @@ class Service
      */
     private $categorie;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $TypeMarketplace;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Adresseweb;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Technologie;
+
     public function getNom(): ?string
     {
         return $this->nom;
@@ -104,6 +119,42 @@ class Service
     public function setCategorie($categorie): void
     {
         $this->categorie = $categorie;
+    }
+
+    public function getTypeMarketplace(): ?string
+    {
+        return $this->TypeMarketplace;
+    }
+
+    public function setTypeMarketplace(string $TypeMarketplace): self
+    {
+        $this->TypeMarketplace = $TypeMarketplace;
+
+        return $this;
+    }
+
+    public function getAdresseweb(): ?string
+    {
+        return $this->Adresseweb;
+    }
+
+    public function setAdresseweb(string $Adresseweb): self
+    {
+        $this->Adresseweb = $Adresseweb;
+
+        return $this;
+    }
+
+    public function getTechnologie(): ?string
+    {
+        return $this->Technologie;
+    }
+
+    public function setTechnologie(string $Technologie): self
+    {
+        $this->Technologie = $Technologie;
+
+        return $this;
     }
 
 }
