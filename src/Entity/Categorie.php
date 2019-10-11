@@ -63,6 +63,9 @@ class Categorie
         $this->categorie = $categorie;
     }
 
-
+public function __toString()
+{
+    return (string) $this->getNom();
+}
 
 }

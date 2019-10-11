@@ -22,6 +22,16 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
+    
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    admin.service:
+        class: App\Admin\ServiceAdmin
+        arguments: [~, App\Entity\Service, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Service }
+    admin.categorie:
+        class: App\Admin\CategorieAdmin
+        arguments: [~, App\Entity\Categorie, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Categorie }
