@@ -41,6 +41,12 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main } # The alias is what is used to retrieve the menu
             - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar } # Named "sidebar" this time
-
+            
+    mopa_bootstrap.navbar_renderer:
+        class: Mopa\Bundle\BootstrapBundle\Navbar\Renderer\NavbarRenderer
+        arguments: [ "@service_container", [] ]
+        tags:
+            # The alias is what is used to retrieve the menu
+            - { name: knp_menu.renderer, alias: navbar }
     # ...
 
