@@ -1,2 +1,5 @@
-{{ product.price|price }}
-{{ product.price|price(2, ',', '.') }}
+{% for service in services %}
+    <a href="/article/{{ service.id }}">
+        {{ service.nom }}
+    </a>
+{% endfor %}

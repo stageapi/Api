@@ -49,4 +49,6 @@ services:
             # The alias is what is used to retrieve the menu
             - { name: knp_menu.renderer, alias: navbar }
     # ...
+   
+
 

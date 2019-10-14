@@ -81,6 +81,25 @@ hr {
   <h1>Products</h1>
   <p>Manage your product catalog</p>
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+  <br>
+  <table>
+   <tr>
+   
+    <td></td>
+        </tr>
+    {% for service in services %}
+        {% set id = service.id %}
+        <tr>                  
+            <td>{{ service.id }}</td>      
+            <td>{{ service.nom }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.categorie ? 'Yes' : 'No' }}</td>
+            <td>{{ service.categorie.nom }}</td>
+            
+            {# and so on ... #}
+        </tr>
+    {% endfor %}
+</table>
   
 </div>
 
