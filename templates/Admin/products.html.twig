@@ -85,7 +85,13 @@ hr {
   <table>
    <tr>
    
-    <td></td>
+{% for service in products %}
+      
+    <td>
+    {{service}}
+    </td>
+ {% endfor %}
+    
         </tr>
     {% for service in services %}
         {% set id = service.id %}

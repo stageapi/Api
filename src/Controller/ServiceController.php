@@ -27,9 +27,15 @@ class ServiceController extends AbstractController
         $services = $this->getDoctrine()
         ->getRepository(Service::class)
         ->findAll();
-         
+        $product = new Service();
+       $products = $product->test();
+      //  var_dump(array_keys(get_object_vars($product)));
+
+       
+       // $products = $product->test();
         return $this->render('Admin/products.html.twig',
-        array('services' => $services));
+        array('services' => $services,'products' => $products)
+    );
 
     }
     /**

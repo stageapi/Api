@@ -156,5 +156,8 @@ class Service
 
         return $this;
     }
-
+    public function test() {
+        return array_keys(get_object_vars($this));
+        
+    }
 }
