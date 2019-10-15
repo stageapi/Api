@@ -24,6 +24,9 @@ class MenuBuilder
     public function createMainMenu()
     {
         $menu = $this->factory->createItem('root');
+        $menu->addChild('Orders', ['route' => 'products']);
+        $menu->addChild('Payements', ['route' => 'attributes']);
+        $menu->addChild('Sshipments', ['route' => 'service']);
         return $menu;
     }
     public function createSidebarMenu(array $options)

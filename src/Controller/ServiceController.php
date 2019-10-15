@@ -52,9 +52,14 @@ class ServiceController extends AbstractController
      * 
      */
     public function grid(){
-        return $this->render('Admin/gridProduct.html.twig', [
-            'controller_name' => 'ServiceController',
-        ]);
+        $services = $this->getDoctrine()
+        ->getRepository(Service::class)
+        ->findAll();
+        $product = new Service();
+       $products = $product->test();
+     //data-url="https://examples.wenzhixin.net.cn/examples/bootstrap_table/data"
+        return $this->render('Admin/gridProduct.html.twig',
+        array('services' => $services,'products' => $products));
 
     }
     /**
