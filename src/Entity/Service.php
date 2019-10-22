@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,6 +54,16 @@ class Service
      * @ORM\Column(type="string", length=255)
      */
     private $Technologie;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Medias", mappedBy="Service")
+     */
+    private $pictures;
+
+    public function __construct()
+    {
+        $this->pictures = new ArrayCollection();
+    }
 
     public function getNom(): ?string
     {
@@ -159,5 +171,36 @@ class Service
     public function test() {
         return array_keys(get_object_vars($this));
         
+    }
+
+    /**
+     * @return Collection|Medias[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Medias $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Medias $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getService() === $this) {
+                $picture->setService(null);
+            }
+        }
+
+        return $this;
     }
 }

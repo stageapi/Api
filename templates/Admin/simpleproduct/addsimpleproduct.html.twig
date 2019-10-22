@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+  <h2>Simple Product</h2>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Details</a></li>
+    <li><a data-toggle="tab" href="#menu1">Categorie</a></li>
+    <li><a data-toggle="tab" href="#menu2">Attributes</a></li>
+    <li><a data-toggle="tab" href="#menu3">Associations</a></li>
+	<li><a data-toggle="tab" href="#menu4">Media</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+	<!--Debut de detail -->
+	
+  <form>
+  <h3>Details</h3>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01">Code</label>
+      <input type="text" class="form-control" id="validationDefault01"   required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Name</label>
+      <input type="text" class="form-control" id="validationDefault02"   required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefaultUsername">Availbility</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+        </div>
+<input type="checkbox" checked data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="danger">
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-row">
+  <br><br><br><br><br><h4>Channels         <input type="checkbox" checked data-toggle="toggle" data-on="US Web Store" data-off="Disable" data-onstyle="success" data-offstyle="danger">
+</h4>
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault03">Price</label>
+      <input type="text" class="form-control" id="validationDefault03" placeholder="$" required>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault04">Original price</label>
+      <input type="text" class="form-control" id="validationDefault04" placeholder="$" required>
+    </div>
+    
+  </div>
+  <div class="form-row">
+  <br><br><br><br><br><h4>Informations</h4>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault03">Slug</label>
+      <input type="text" class="form-control" id="validationDefault03"  required>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault04">Description</label>
+      <textarea   class="form-control" id="validationDefault04"  required></textarea>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault05">Meta description</label>
+      <textarea  class="form-control" id="validationDefault05"  ></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+	  <button class="btn btn-primary" type="submit">Submit form</button>
+</div>
+    </div>
+	</form>
+  </div>
+
+	  
+	  <!-- FIN de Detail -->
+    
+    <div id="menu1" class="tab-pane fade">
+      <h3>Categorie</h3>
+      <!-- DropdownMenu-->
+	   <div class="btn-group">
+    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Select a Category <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for categorie in categories %}  
+			 {% if categorie.categorie == null %}
+     
+                 <li class="dropdown-item" value="{{categorie.id}}"><a href="#">{{categorie.nom}}</a></li>  
+                 {% for sub in categories %}            
+                {% if sub.categorie != null and  sub.categorie.id == categorie.id  %} 
+                        <li class="dropdown-item" value="{{sub.id}}"><a href="#">{{categorie.nom}}/{{sub.nom}}</a></li>            
+                    {% endif %}
+                      {% endfor %}
+
+         {% endif %}
+                {% endfor %}
+  
+    
+    
+    </ul>
+  </div>
+  <!--End of DropDown -->
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+	<div id="menu4" class="tab-pane fade">
+	<h3>Media</h3>
+	 {% block body %}
+    {{ include('Admin/simpleproduct/media.html.twig') }}
+{% endblock %}
+	</div>
+  </div>
+</div>
+
+<script>
+$(".dropdown-menu li a").click(function(){
+  var selText = $(this).text();
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+});
+</script>
+</body>
+</html>

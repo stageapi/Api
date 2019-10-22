@@ -242,7 +242,7 @@
 					</div>
 					<div class="col-sm-6">
 					
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
+						<a href="Admin/AddProduct" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
 						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
 					</div>
                 </div>
@@ -285,7 +285,16 @@
             <td><a href="/categorie/{{service.categorie.id}}">{{ service.categorie.nom }}</a></td>
             <td>{{ service.TypeMarketplace }}</td>
             <td>{{ service.Adresseweb }}</td>
-			<td>{{ service.Technologie }}</td>        
+			<td>
+			{% if service.Technologie == 'aaa' %}
+			<button type="button" class="btn btn-labeled btn-success" >
+                <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Enable</button>
+				
+				{% else %}
+				<button type="button" class="btn btn-labeled btn-danger">
+                <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Disable</button>
+				{% endif %}
+			</td>        
 
               <td>
                             <a href="#editProductModal/{{service.id}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -305,6 +314,7 @@
 	</div>
 	</div>
 </div>
+
 <script>
 $(document).ready(function(){
 	// Activate tooltip
