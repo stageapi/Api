@@ -285,14 +285,13 @@
             <td><a href="/categorie/{{service.categorie.id}}">{{ service.categorie.nom }}</a></td>
             <td>{{ service.TypeMarketplace }}</td>
             <td>{{ service.Adresseweb }}</td>
+			<td>{{ service.Technologie }}</td>
 			<td>
 			{% if service.Technologie == 'aaa' %}
-			<button type="button" class="btn btn-labeled btn-success" >
-                <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Enable</button>
+			<img src="https://i.ibb.co/kQq23hz/tshirt.jpg" alt="tshirt" border="0" height="100" width="100"> 
 				
 				{% else %}
-				<button type="button" class="btn btn-labeled btn-danger">
-                <span class="btn-label"><i class="glyphicon glyphicon-remove"></i></span>Disable</button>
+			<img src="https://i.ibb.co/G017Mbh/s1.jpg" alt="s1" border="0" height="100" width="100">
 				{% endif %}
 			</td>        
 

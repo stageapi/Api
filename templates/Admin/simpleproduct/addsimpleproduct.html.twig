@@ -27,59 +27,10 @@
     <div id="home" class="tab-pane fade in active">
 	<!--Debut de detail -->
 	
-  <form>
+  <form  method="POST">
   <h3>Details</h3>
   <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">Code</label>
-      <input type="text" class="form-control" id="validationDefault01"   required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault02">Name</label>
-      <input type="text" class="form-control" id="validationDefault02"   required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefaultUsername">Availbility</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-        </div>
-<input type="checkbox" checked data-toggle="toggle" data-on="Enable" data-off="Disable" data-onstyle="success" data-offstyle="danger">
-      </div>
-    </div>
-  </div>
-  
-  <div class="form-row">
-  <br><br><br><br><br><h4>Channels         <input type="checkbox" checked data-toggle="toggle" data-on="US Web Store" data-off="Disable" data-onstyle="success" data-offstyle="danger">
-</h4>
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault03">Price</label>
-      <input type="text" class="form-control" id="validationDefault03" placeholder="$" required>
-    </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault04">Original price</label>
-      <input type="text" class="form-control" id="validationDefault04" placeholder="$" required>
-    </div>
-    
-  </div>
-  <div class="form-row">
-  <br><br><br><br><br><h4>Informations</h4>
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault03">Slug</label>
-      <input type="text" class="form-control" id="validationDefault03"  required>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault04">Description</label>
-      <textarea   class="form-control" id="validationDefault04"  required></textarea>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault05">Meta description</label>
-      <textarea  class="form-control" id="validationDefault05"  ></textarea>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-md-3 mb-3">
-	  <button class="btn btn-primary" type="submit">Submit form</button>
-</div>
+   {{form(form)}}
     </div>
 	</form>
   </div>

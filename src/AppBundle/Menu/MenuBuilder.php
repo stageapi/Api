@@ -33,6 +33,7 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('root');
        // $menu->setChildrenAttribute('class', 'nav navbar-nav');
+       $menu->addChild('Categorie', ['route' => 'service']);
         $menu->addChild('Products', ['route' => 'products']);
         $menu->addChild('Attributes', ['route' => 'attributes']);
         $menu->addChild('Options', ['route' => 'service']);

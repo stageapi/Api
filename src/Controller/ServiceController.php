@@ -3,13 +3,16 @@
 namespace App\Controller;
 use App\Entity\Service;
 use App\Entity\Categorie;
+use App\Entity\Medias;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 class ServiceController extends AbstractController
 {
     private $em;
@@ -68,11 +71,37 @@ class ServiceController extends AbstractController
     /**
      * @Route("/Admin/AddProduct",name="addproduct")
      */
-public function addProduct(){
+public function addProduct(Request $request){
+    $task = new Service();
+    $form = $this->createFormBuilder($task)
+             ->add('nom', TextType::class)
+             ->add('description', TextType::class)
+             ->add('Technologie', TextType::class)
+             ->add('TypeMarketplace', TextType::class)
+             ->add('Adresseweb', TextType::class)
+             ->add('submit', SubmitType::class, ['label' => 'Create Task'])
+             ->getForm();
+             
+              $form->handleRequest($request);
+              if ($form->isSubmitted() && $form->isValid()) {
+                  // $form->getData() holds the submitted values
+                  // but, the original `$task` variable has also been updated
+                  $task = $form->getData();
+          
+                  // ... perform some action, such as saving the task to the database
+                  // for example, if Task is a Doctrine entity, save it!
+                  $entityManager = $this->getDoctrine()->getManager();
+                  $entityManager->persist($task);
+                  $entityManager->flush();
+          
+                  return $this->redirectToRoute('service');
+              }
+
     $Categorie = $this->getDoctrine()
     ->getRepository(Categorie::class)
     ->findAll();
-return $this->render('Admin/AddProduct.html.twig',array('categories' => $Categorie));
+    
+return $this->render('Admin/AddProduct.html.twig',array('categories' => $Categorie ,'form' => $form->createView() ));
 
 }
 
@@ -107,7 +136,7 @@ return $this->render('Admin/AddProduct.html.twig',array('categories' => $Categor
     $fileName = md5(uniqid()).'.'.$file->guessExtension();
  
     // set your uploads directory
-    $uploadDir = '/public/images/uploads/';
+    $uploadDir = $this->getParameter('brochures_directory');
     if (!file_exists($uploadDir) && !is_dir($uploadDir)) {
         mkdir($uploadDir, 0775, true);
     }
@@ -116,13 +145,9 @@ return $this->render('Admin/AddProduct.html.twig',array('categories' => $Categor
         $em = $this->getDoctrine()->getManager();
  
         // create and set this mediaEntity
-        $mediaEntity = new Service();
-        $mediaEntity->setPhoto($fileName);
-        $mediaEntity->setNom("ahmed");
-        $mediaEntity->setDescription("sdsd");
-        $mediaEntity->setTechnologie("hhhh");
-        $mediaEntity->setTypeMarketplace("fdfdfd");
-        $mediaEntity->setAdresseweb("dddd");
+        $mediaEntity = new Medias();
+        $mediaEntity->setFilename($fileName);
+
 
         // save the uploaded filename to database
         $em->persist($mediaEntity);
@@ -133,5 +158,64 @@ return $this->render('Admin/AddProduct.html.twig',array('categories' => $Categor
     };
     return new JsonResponse($output);
 }
+  /**
+     * @Route("/addservice", name="addservice")
+     */
+    public function addservice(Request $request)
+    {
+        $Product  = new Service();
+        $params = array();
+        $em = $this->getDoctrine()->getManager();
+        $datas = json_decode($request->getContent(), true);
+        $categorie = $this->getDoctrine()->getRepository(Categorie::class)->find($datas['Categorie']);
+        
+        $Product->setNom($datas['name']);
+        $Product->setDescription($datas['description']);
+        //$Product->setStatus($datas['status']);
+        //$Product->setCategory($categorie);
+        $em->persist($Product);
+            $em->flush();
+        return new Response(sprintf('product created  succesfuly')); 
+    }
+     /**
+     * @Route("/Admin/AddSimpleProduct",name="addsimpleproduct")
+     */
   
+    public function new(Request $request){
+        $Categorie = $this->getDoctrine()
+        ->getRepository(Categorie::class)
+        ->findAll();
+        $task = new Service();
+        // $task->setNom('Write a blog post');
+         //$task->setTechnologie("ddd");
+    
+         $form = $this->createFormBuilder($task)
+             ->add('nom', TextType::class)
+             ->add('description', TextType::class)
+             ->add('Technologie', TextType::class)
+             ->add('TypeMarketplace', TextType::class)
+             ->add('Adresseweb', TextType::class)
+             ->add('submit', SubmitType::class, ['label' => 'Create Task'])
+             ->getForm();
+             
+              $form->handleRequest($request);
+              if ($form->isSubmitted() && $form->isValid()) {
+                  // $form->getData() holds the submitted values
+                  // but, the original `$task` variable has also been updated
+                  $task = $form->getData();
+          
+                  // ... perform some action, such as saving the task to the database
+                  // for example, if Task is a Doctrine entity, save it!
+                  $entityManager = $this->getDoctrine()->getManager();
+                  $entityManager->persist($task);
+                  $entityManager->flush();
+          
+                  return $this->redirectToRoute('service');
+              }
+ return $this->render('Admin/simpleproduct/addsimpleproduct.html.twig', [
+            'form' => $form->createView(),'categories' => $Categorie
+        ]);
+
+
+    }
 }
